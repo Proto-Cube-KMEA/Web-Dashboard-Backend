@@ -13,8 +13,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS members (
     points int
 );`)
 app.get('/', (req, res) => {
-    await pool.connect();
-    resp = await pool.query('select * from members;')
+    resp =  pool.query('select * from members;')
     res.send(JSON.stringify(resp))
 })
 
