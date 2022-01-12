@@ -14,7 +14,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS members (
 app.get('/', (req, res) => {
     
     getAllMembers(pool).then(resp=>{
-      res.writeHead(200,{"Access-Control-Allow-Origin": "*"});
+      res.set("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify(resp));
     });
 })
