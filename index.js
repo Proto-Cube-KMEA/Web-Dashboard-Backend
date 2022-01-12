@@ -12,8 +12,11 @@ pool.query(`CREATE TABLE IF NOT EXISTS members (
     points int
 );`)
 app.get('/', (req, res) => {
-    res.writeHead(200,{"Access-Control-Allow-Origin": "*"})
-    getAllMembers(pool).then(resp=>res.send(JSON.stringify(resp))) 
+    
+    getAllMembers(pool).then(resp=>{
+      res.writeHead(200,{"Access-Control-Allow-Origin": "*"});
+      res.send(JSON.stringify(resp));
+    });
 })
 
 app.listen(process.env.PORT)
