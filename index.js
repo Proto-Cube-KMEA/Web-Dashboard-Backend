@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = 3000
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -13,15 +12,15 @@ pool.query(`CREATE TABLE IF NOT EXISTS members (
     points int
 );`)
 app.get('/', (req, res) => {
-    
+    res.writeHead(200,{"Access-Control-Allow-Origin": "*"})
     getAllMembers(pool).then(resp=>res.send(JSON.stringify(resp))) 
 })
 
-app.listen(process.env.PORT || port)
+app.listen(process.env.PORT)
 
 async function getAllMembers(pool)
 {
     await pool.connect();
-    resp =  pool.query('select * from members;')
+    resp =  pool.query('select * from members order by points desc;')
     return resp;
 }
