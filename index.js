@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
       let text = ""
       for(var i = 0; i <resp.rowCount; i++)
       {
-        text += `<img src="${resp.rows[i].avatarurl}">${resp.rows[i].tag}<br>`;
+        text += `<img src="${resp.rows[i].avatarurl}"> ${resp.rows[i].points} ${resp.rows[i].tag}<br>`;
       }
       res.set("Access-Control-Allow-Origin", "*");
       res.send(text);
