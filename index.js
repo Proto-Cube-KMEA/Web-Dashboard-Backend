@@ -14,8 +14,13 @@ pool.query(`CREATE TABLE IF NOT EXISTS members (
 app.get('/', (req, res) => {
     
     getAllMembers(pool).then(resp=>{
+      let text = ""
+      for(var i = 0; i <resp.rowCount; i++)
+      {
+        text += `<img src="${resp.rows[i].avatarurl}">${resp.rows[i].tag}`;
+      }
       res.set("Access-Control-Allow-Origin", "*");
-      res.send(JSON.stringify(resp));
+      res.send(text);
     });
 })
 
