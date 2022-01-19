@@ -8,8 +8,10 @@ const pool = new Pool({
   }
 });
 pool.query(`CREATE TABLE IF NOT EXISTS members (
-    userId varchar(20) PRIMARY KEY,
-    points int
+  userId varchar(20) PRIMARY KEY,
+  points int,
+  tag varchar(50),
+  avatarurl varchar(100)
 );`)
 app.get('/', (req, res) => {
     
