@@ -14,10 +14,6 @@ pool.query(`CREATE TABLE IF NOT EXISTS members (
   avatarurl varchar(100)
 );`)
 app.get('/', (req, res) => {
-    
-    getAllMembers(pool)
-
-
   pool
   .connect()
   .then(client => {
