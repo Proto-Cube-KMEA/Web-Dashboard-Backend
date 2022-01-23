@@ -45,9 +45,13 @@ app.get('/json', (req, res) => {
     return client
       .query('select * from members order by points desc;')
       .then(resp=>{
-        client.release()
+        let text = ""
+        for(var i = 0; i <resp.rowCount; i++)
+        {
+          text += `<img src="${resp.rows[i].avatarurl}"> ${resp.rows[i].points} ${resp.rows[i].tag}<br>`;
+        }
         res.set("Access-Control-Allow-Origin", "*");
-        res.json(resp);
+        res.send(text);
       })
       .catch(err => {
         client.release()
@@ -56,4 +60,7 @@ app.get('/json', (req, res) => {
   })
 })
 
+app.get('/null', (req, res) =>{
+  res.sendFile(__dirname+'/public/null.jpg')
+})
 app.listen(process.env.PORT)
