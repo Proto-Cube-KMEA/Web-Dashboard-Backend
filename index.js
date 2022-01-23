@@ -46,13 +46,17 @@ app.get('/json', (req, res) => {
     return client
       .query('select * from members order by points desc;')
       .then(resp=>{
-        let text = ""
+        let users = []
         for(var i = 0; i <resp.rowCount; i++)
         {
-          text += `<img src="${resp.rows[i].avatarurl}"> ${resp.rows[i].points} ${resp.rows[i].tag}<br>`;
+          users.push({
+            tag:`${resp.rows[i].tag}`,
+            points:`${resp.rows[i].points}`,
+            imgurl:`${resp.rows[i].avatarurl}`
+          })
         }
         res.set("Access-Control-Allow-Origin", "*");
-        res.send(text);
+        res.json(users);
       })
       .catch(err => {
         client.release()
