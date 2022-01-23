@@ -13,6 +13,9 @@ pool.query(`CREATE TABLE IF NOT EXISTS members (
   tag varchar(50),
   avatarurl varchar(100)
 );`)
+
+app.use(express.static(__dirname+'/public'));
+
 app.get('/', (req, res) => {
   pool
   .connect()
@@ -27,6 +30,24 @@ app.get('/', (req, res) => {
         }
         res.set("Access-Control-Allow-Origin", "*");
         res.send(text);
+      })
+      .catch(err => {
+        client.release()
+        console.log(err.stack)
+      })
+  })
+})
+
+app.get('/json', (req, res) => {
+  pool
+  .connect()
+  .then(client => {
+    return client
+      .query('select * from members order by points desc;')
+      .then(resp=>{
+        client.release()
+        res.set("Access-Control-Allow-Origin", "*");
+        res.json(resp);
       })
       .catch(err => {
         client.release()
