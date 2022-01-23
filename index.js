@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
         {
           text += `<img src="${resp.rows[i].avatarurl}"> ${resp.rows[i].points} ${resp.rows[i].tag}<br>`;
         }
+        client.release();
         res.set("Access-Control-Allow-Origin", "*");
         res.send(text);
       })
