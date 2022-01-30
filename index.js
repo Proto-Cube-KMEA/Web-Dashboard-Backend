@@ -64,6 +64,7 @@ app.get('/', (req, res) => {
                         </div>
                         <div class="col-8">
                           <div class="card-body">
+                            <h4 class="card-text">Rank: ${i + 1}</h4>
                             <h5 class="card-title">${resp.rows[i].tag}</h5>
                             <p class="card-text">POINTS: ${resp.rows[i].points}</p>
                           </div>
