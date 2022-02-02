@@ -55,6 +55,7 @@ app.get('/', (req, res) => {
             </div>
           </nav>
         `
+        rank = 1;
         for(var i = 0; i <resp.rowCount; i++)
         {
           text += ` <div class="card mb-3 container-fluid" style="max-width: 540px;">
@@ -64,13 +65,14 @@ app.get('/', (req, res) => {
                         </div>
                         <div class="col-8">
                           <div class="card-body">
-                            <h4 class="card-text">Rank: ${i + 1}</h4>
+                            <h4 class="card-text">Rank: ${rank}</h4>
                             <h5 class="card-title">${resp.rows[i].tag}</h5>
                             <p class="card-text">POINTS: ${resp.rows[i].points}</p>
                           </div>
                         </div>
                       </div>
                     </div>`
+          if(resp.rows[i+1] !== undefined && resp.rows[i].points === resp.rows[i+1].points) rank++;
           
         }
         text += `</body></html>`;
