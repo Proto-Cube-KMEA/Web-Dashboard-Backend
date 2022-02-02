@@ -72,6 +72,8 @@ app.get('/', (req, res) => {
                         </div>
                       </div>
                     </div>`
+          if(resp.rows[i+1].points !== undefined && resp.rows[i].points === resp.rows[i+1].points) rank++;
+          
         }
         text += `</body></html>`;
         client.release();
