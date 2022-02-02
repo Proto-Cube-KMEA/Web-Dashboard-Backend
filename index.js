@@ -72,7 +72,7 @@ app.get('/', (req, res) => {
                         </div>
                       </div>
                     </div>`
-          if(resp.rows[i+1] !== undefined && resp.rows[i].points === resp.rows[i+1].points) rank++;
+          if(resp.rows[i+1] !== undefined && resp.rows[i].points !== resp.rows[i+1].points) rank++;
           
         }
         text += `</body></html>`;
